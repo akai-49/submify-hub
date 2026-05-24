@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Shield, BarChart3, Mail, Zap, Users, Lock } from "lucide-react";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -14,6 +15,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Landing() {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -28,7 +31,7 @@ function Landing() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-primary" />
               </span>
-              Production-ready · Built on Lovable Cloud
+              Production-ready
             </div>
             <h1 className="text-4xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
               Form submissions,
@@ -41,16 +44,26 @@ function Landing() {
               Collect leads, contact requests, or onboarding data with a beautiful form, secure auth,
               email confirmations, and a full admin dashboard with analytics.
             </p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button size="lg" asChild>
-                <Link to="/signup">
-                  Get started free <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/submit">Try the form</Link>
-              </Button>
-            </div>
+            {!user ? (
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Button size="lg" asChild>
+                  <Link to="/signup">
+                    Get started free <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link to="/submit">Try the form</Link>
+                </Button>
+              </div>
+            ) : (
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Button size="lg" asChild>
+                  <Link to="/dashboard">
+                    Go to Dashboard <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -86,22 +99,24 @@ function Landing() {
       </section>
 
       {/* CTA */}
-      <section className="container mx-auto px-4 py-20">
-        <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-card to-card p-10 text-center md:p-16">
-          <h2 className="text-3xl font-bold text-foreground md:text-4xl">Start collecting in minutes</h2>
-          <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-            Sign up, submit your first entry, and watch it appear in the admin dashboard in real time.
-          </p>
-          <Button size="lg" className="mt-6" asChild>
-            <Link to="/signup">
-              Create your account <ArrowRight className="ml-1 h-4 w-4" />
-            </Link>
-          </Button>
-        </div>
-      </section>
+      {!user && (
+        <section className="container mx-auto px-4 py-20">
+          <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-gradient-to-br from-primary/10 via-card to-card p-10 text-center md:p-16">
+            <h2 className="text-3xl font-bold text-foreground md:text-4xl">Start collecting in minutes</h2>
+            <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
+              Sign up, submit your first entry, and watch it appear in the admin dashboard in real time.
+            </p>
+            <Button size="lg" className="mt-6" asChild>
+              <Link to="/signup">
+                Create your account <ArrowRight className="ml-1 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </section>
+      )}
 
       <footer className="border-t border-border/40 py-8 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} FormFlow. Built with Lovable.
+        © {new Date().getFullYear()} FormFlow..
       </footer>
     </div>
   );
