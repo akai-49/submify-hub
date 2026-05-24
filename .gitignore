@@ -40,3 +40,7 @@ dist-ssr
 # Lovable
 .lovable
 *.lovable
+
+# AI
+.antigravitycli
+*.antigravitycli
