@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/landing/Hero";
+import { Trust } from "@/components/landing/Trust";
 import { Services } from "@/components/landing/Services";
+import { Process } from "@/components/landing/Process";
 import { Portfolio } from "@/components/landing/Portfolio";
-import { Features } from "@/components/landing/Features";
-import { TechStack } from "@/components/landing/TechStack";
-import { Testimonials } from "@/components/landing/Testimonials";
-import { Contact } from "@/components/landing/Contact";
+import { Metrics } from "@/components/landing/Metrics";
+import { CTA } from "@/components/landing/CTA";
 import { Footer } from "@/components/landing/Footer";
 
 export const Route = createFileRoute("/")({
@@ -21,16 +21,16 @@ export const Route = createFileRoute("/")({
 
 function Landing() {
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-primary">
+    <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-primary overflow-x-hidden">
       <Header />
       <main>
         <Hero />
+        <Trust />
         <Services />
+        <Process />
         <Portfolio />
-        <Features />
-        <TechStack />
-        <Testimonials />
-        <Contact />
+        <Metrics />
+        <CTA />
       </main>
       <Footer />
     </div>

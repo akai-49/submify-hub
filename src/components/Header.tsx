@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/lib/auth-context";
 import { Button } from "@/components/ui/button";
-import { Sparkles, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -21,71 +21,69 @@ export function Header() {
 
   return (
     <header 
-      className={`fixed top-0 z-50 w-full transition-all duration-500 ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 h-20 flex items-center ${
         isScrolled 
-          ? "border-b border-border/20 bg-background/60 backdrop-blur-2xl shadow-sm" 
-          : "bg-transparent py-2"
+          ? "bg-background/70 backdrop-blur-xl shadow-[0_1px_2px_rgba(0,0,0,0.05)] border-b border-border/50" 
+          : "bg-transparent py-4"
       }`}
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        <Link to="/" className="flex items-center gap-2 font-bold text-xl group">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-accent text-white shadow-[0_0_20px_-5px_var(--color-primary)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3">
-            <Sparkles className="h-4 w-4" />
-          </div>
-          <span className="tracking-tight text-foreground group-hover:text-white transition-colors">Agency.AI</span>
+      <div className="container mx-auto flex w-full items-center justify-between px-6 lg:px-8">
+        <Link to="/" className="flex items-center gap-2 font-bold text-2xl tracking-tighter text-foreground group">
+          Agency<span className="text-primary">.</span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex rounded-full border border-border/40 bg-background/50 px-6 py-2.5 backdrop-blur-md shadow-sm">
-          <a href="#services" className="text-sm font-medium text-muted-foreground transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+        <nav className="hidden md:flex items-center gap-8">
+          <a href="#services" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             Services
           </a>
-          <a href="#portfolio" className="text-sm font-medium text-muted-foreground transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
+          <a href="#portfolio" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
             Portfolio
           </a>
-          <a href="#features" className="text-sm font-medium text-muted-foreground transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">
-            Why Us
+          <a href="#process" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            Process
           </a>
-          {user && (
-            <Link to="/dashboard" className="text-sm font-medium text-muted-foreground transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" activeProps={{ className: "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" }}>
-              Dashboard
-            </Link>
-          )}
-          {isAdmin && (
-            <Link to="/admin" className="text-sm font-medium text-muted-foreground transition-all hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" activeProps={{ className: "text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]" }}>
-              Admin
-            </Link>
-          )}
+          <a href="#about" className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
+            About
+          </a>
         </nav>
 
         <div className="hidden items-center gap-4 md:flex">
           {user ? (
-            <Button
-              variant="ghost"
-              className="text-sm font-medium hover:text-primary hover:bg-primary/10 transition-colors"
-              onClick={async () => {
-                await signOut();
-                navigate({ to: "/" });
-              }}
-            >
-              Sign out
-            </Button>
+            <div className="flex items-center gap-4">
+              <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                Dashboard
+              </Link>
+              {isAdmin && (
+                <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground">
+                  Admin
+                </Link>
+              )}
+              <Button
+                variant="ghost"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+                onClick={async () => {
+                  await signOut();
+                  navigate({ to: "/" });
+                }}
+              >
+                Sign out
+              </Button>
+            </div>
           ) : (
-            <>
-              <Button variant="ghost" className="text-sm font-medium hover:text-white hover:bg-white/5 transition-colors" asChild>
-                <Link to="/login">Log in</Link>
-              </Button>
-              <Button className="rounded-full px-6 bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-[0_0_20px_-5px_var(--color-primary)] transition-all hover:shadow-[0_0_30px_-5px_var(--color-primary)] hover:scale-105 border-0" asChild>
-                <a href="#contact">Get Started</a>
-              </Button>
-            </>
+            <Button variant="ghost" className="text-sm font-medium text-muted-foreground hover:text-foreground" asChild>
+              <Link to="/login">Log in</Link>
+            </Button>
           )}
+          <Button className="rounded-full px-6 bg-primary hover:bg-primary-hover text-primary-foreground shadow-sm transition-all hover:scale-105 border-0 font-medium" asChild>
+            <a href="#contact">Book a Call</a>
+          </Button>
         </div>
 
         <button 
-          className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-border/50 bg-background/50 text-foreground transition-colors hover:bg-white/5"
+          className="md:hidden flex h-10 w-10 items-center justify-center text-foreground transition-colors"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
@@ -93,53 +91,65 @@ export function Header() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-border/20 bg-background/95 backdrop-blur-3xl overflow-hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="absolute top-20 left-0 w-full md:hidden border-b border-border bg-background/95 backdrop-blur-xl shadow-lg overflow-hidden"
           >
             <div className="flex flex-col gap-2 p-6">
               <a 
                 href="#services" 
-                className="text-lg font-medium text-foreground/90 py-3 border-b border-border/10 hover:text-primary transition-colors"
+                className="text-lg font-medium text-foreground py-3 border-b border-border/50"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Services
               </a>
               <a 
                 href="#portfolio" 
-                className="text-lg font-medium text-foreground/90 py-3 border-b border-border/10 hover:text-primary transition-colors"
+                className="text-lg font-medium text-foreground py-3 border-b border-border/50"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Portfolio
               </a>
               <a 
-                href="#features" 
-                className="text-lg font-medium text-foreground/90 py-3 border-b border-border/10 hover:text-primary transition-colors"
+                href="#process" 
+                className="text-lg font-medium text-foreground py-3 border-b border-border/50"
                 onClick={() => setMobileMenuOpen(false)}
               >
-                Why Us
+                Process
+              </a>
+              <a 
+                href="#about" 
+                className="text-lg font-medium text-foreground py-3 border-b border-border/50"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                About
               </a>
               <div className="flex flex-col gap-3 mt-6">
                 {user ? (
-                  <Button
-                    variant="outline"
-                    className="w-full justify-center h-12 rounded-xl bg-background/50 backdrop-blur-md"
-                    onClick={async () => {
-                      await signOut();
-                      setMobileMenuOpen(false);
-                      navigate({ to: "/" });
-                    }}
-                  >
-                    Sign out
-                  </Button>
+                  <>
+                    <Button variant="outline" className="w-full justify-center h-12 rounded-lg" asChild onClick={() => setMobileMenuOpen(false)}>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="w-full justify-center h-12 rounded-lg"
+                      onClick={async () => {
+                        await signOut();
+                        setMobileMenuOpen(false);
+                        navigate({ to: "/" });
+                      }}
+                    >
+                      Sign out
+                    </Button>
+                  </>
                 ) : (
                   <>
-                    <Button variant="outline" className="w-full justify-center h-12 rounded-xl bg-background/50 backdrop-blur-md" asChild onClick={() => setMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full justify-center h-12 rounded-lg" asChild onClick={() => setMobileMenuOpen(false)}>
                       <Link to="/login">Log in</Link>
                     </Button>
-                    <Button className="w-full justify-center h-12 rounded-xl bg-gradient-to-r from-primary to-accent border-0 shadow-[0_0_20px_-5px_var(--color-primary)]" asChild onClick={() => setMobileMenuOpen(false)}>
-                      <a href="#contact">Get Started</a>
+                    <Button className="w-full justify-center h-12 rounded-lg bg-primary hover:bg-primary-hover text-white font-medium" asChild onClick={() => setMobileMenuOpen(false)}>
+                      <a href="#contact">Book a Call</a>
                     </Button>
                   </>
                 )}
