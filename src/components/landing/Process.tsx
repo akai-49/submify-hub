@@ -4,23 +4,27 @@ const steps = [
   {
     num: "01",
     title: "Discovery",
-    description: "We dive deep into your business goals, user needs, and technical requirements to form a solid strategy.",
+    description:
+      "We dive deep into your business goals, user needs, and technical requirements to form a solid strategy.",
   },
   {
     num: "02",
     title: "Design",
-    description: "Creating wireframes and high-fidelity prototypes that define the user experience and visual aesthetic.",
+    description:
+      "Creating wireframes and high-fidelity prototypes that define the user experience and visual aesthetic.",
   },
   {
     num: "03",
     title: "Development",
-    description: "Building the product with scalable architecture, modern frameworks, and rigorous testing.",
+    description:
+      "Building the product with scalable architecture, modern frameworks, and rigorous testing.",
   },
   {
     num: "04",
     title: "Launch",
-    description: "Deploying the final product to production, monitoring performance, and ensuring a smooth rollout.",
-  }
+    description:
+      "Deploying the final product to production, monitoring performance, and ensuring a smooth rollout.",
+  },
 ];
 
 export function Process() {
@@ -50,15 +54,13 @@ export function Process() {
               {index < steps.length - 1 && (
                 <div className="hidden lg:block absolute top-8 left-full w-full h-[1px] bg-border -ml-4 z-0" />
               )}
-              
+
               <div className="relative z-10 bg-surface border border-border w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold text-foreground mb-6 shadow-sm">
                 {step.num}
               </div>
-              
+
               <h3 className="text-2xl font-bold text-foreground mb-3">{step.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {step.description}
-              </p>
+              <p className="text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>

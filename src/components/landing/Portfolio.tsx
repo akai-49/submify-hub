@@ -4,22 +4,25 @@ import { ExternalLink } from "lucide-react";
 const projects = [
   {
     title: "NexFinance SaaS",
-    description: "A comprehensive financial dashboard for enterprise clients. Features real-time data visualization, predictive AI modeling, and automated reporting systems.",
+    description:
+      "A comprehensive financial dashboard for enterprise clients. Features real-time data visualization, predictive AI modeling, and automated reporting systems.",
     tech: ["Next.js", "Tailwind CSS", "PostgreSQL", "Stripe"],
-    imageStyle: "bg-gradient-to-br from-gray-100 to-gray-200"
+    imageStyle: "bg-gradient-to-br from-gray-100 to-gray-200",
   },
   {
     title: "HealthCore Platform",
-    description: "Secure, HIPAA-compliant patient management system. Streamlines appointment scheduling, medical records, and telemedicine communications.",
+    description:
+      "Secure, HIPAA-compliant patient management system. Streamlines appointment scheduling, medical records, and telemedicine communications.",
     tech: ["React", "Node.js", "Supabase", "WebRTC"],
-    imageStyle: "bg-gradient-to-br from-gray-50 to-gray-100"
+    imageStyle: "bg-gradient-to-br from-gray-50 to-gray-100",
   },
   {
     title: "LogisSync ERP",
-    description: "Custom ERP solution for global logistics. Optimizes supply chain routing, inventory tracking, and automated vendor payments.",
+    description:
+      "Custom ERP solution for global logistics. Optimizes supply chain routing, inventory tracking, and automated vendor payments.",
     tech: ["Frappe", "Python", "Redis", "Docker"],
-    imageStyle: "bg-gradient-to-br from-gray-200 to-gray-300"
-  }
+    imageStyle: "bg-gradient-to-br from-gray-200 to-gray-300",
+  },
 ];
 
 export function Portfolio() {
@@ -32,7 +35,8 @@ export function Portfolio() {
               Selected <span className="text-primary">Work.</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              We build scalable digital products that solve real problems. Here are some of our recent highlights.
+              We build scalable digital products that solve real problems. Here are some of our
+              recent highlights.
             </p>
           </div>
         </div>
@@ -45,12 +49,14 @@ export function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
-              className={`flex flex-col gap-8 lg:gap-16 ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center`}
+              className={`flex flex-col gap-8 lg:gap-16 ${index % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row"} items-center`}
             >
               {/* Image/Mockup */}
               <div className="w-full lg:w-3/5">
                 <div className="group relative w-full aspect-video rounded-3xl overflow-hidden border border-border shadow-sm hover:shadow-xl transition-all duration-500">
-                  <div className={`absolute inset-0 ${project.imageStyle} flex items-center justify-center p-8`}>
+                  <div
+                    className={`absolute inset-0 ${project.imageStyle} flex items-center justify-center p-8`}
+                  >
                     {/* Abstract Mockup UI */}
                     <div className="w-full h-full bg-background rounded-xl shadow-lg border border-border/50 flex flex-col overflow-hidden transition-transform duration-500 group-hover:scale-105">
                       <div className="h-8 border-b border-border/50 bg-surface flex items-center px-4 gap-1.5">
@@ -78,13 +84,19 @@ export function Portfolio() {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
-                  {project.tech.map(t => (
-                    <span key={t} className="px-3 py-1 bg-surface border border-border rounded-full text-sm font-medium text-foreground">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 bg-surface border border-border rounded-full text-sm font-medium text-foreground"
+                    >
                       {t}
                     </span>
                   ))}
                 </div>
-                <a href="#contact" className="inline-flex items-center text-primary font-semibold hover:text-primary-hover transition-colors group">
+                <a
+                  href="#contact"
+                  className="inline-flex items-center text-primary font-semibold hover:text-primary-hover transition-colors group"
+                >
                   View Case Study
                   <ExternalLink className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </a>

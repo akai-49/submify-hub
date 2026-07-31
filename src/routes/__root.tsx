@@ -1,9 +1,13 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { AuthProvider } from "@/lib/auth-context";
 import { Toaster } from "@/components/ui/sonner";
-import { Chatbot } from "@/components/Chatbot";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, canonical } from "@/lib/site";
 
 import appCss from "../styles.css?url";
+
+// Floating widget, never part of the first paint — keep it out of the entry chunk.
+const Chatbot = lazy(() => import("@/components/Chatbot").then((m) => ({ default: m.Chatbot })));
 
 function NotFoundComponent() {
   return (
@@ -32,14 +36,32 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FormFlow — Modern form submissions for SaaS" },
-      { name: "description", content: "Collect, manage, and analyze form submissions with built-in auth, admin dashboard, and email confirmations." },
-      { property: "og:title", content: "FormFlow — Modern form submissions for SaaS" },
-      { property: "og:description", content: "Collect, manage, and analyze form submissions with built-in auth, admin dashboard, and email confirmations." },
+      { title: `${SITE_NAME} — Premium Software & AI Agency` },
+      { name: "description", content: SITE_DESCRIPTION },
+      { name: "theme-color", content: "#0F172A" },
+      { property: "og:site_name", content: SITE_NAME },
+      { property: "og:title", content: `${SITE_NAME} — Premium Software & AI Agency` },
+      { property: "og:description", content: SITE_DESCRIPTION },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
+      { property: "og:url", content: canonical("/") },
+      { property: "og:image", content: canonical("/og.png") },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      {
+        property: "og:image:alt",
+        content: `${SITE_NAME} — Smart websites, applications and AI automation`,
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: `${SITE_NAME} — Premium Software & AI Agency` },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: canonical("/og.png") },
     ],
-    links: [{ rel: "stylesheet", href: appCss }],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "canonical", href: canonical("/") },
+      { rel: "preconnect", href: import.meta.env.VITE_SUPABASE_URL ?? SITE_URL },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
@@ -86,7 +108,9 @@ function RootComponent() {
     <AuthProvider>
       <Outlet />
       <Toaster richColors position="top-right" />
-      <Chatbot />
+      <Suspense fallback={null}>
+        <Chatbot />
+      </Suspense>
     </AuthProvider>
   );
 }

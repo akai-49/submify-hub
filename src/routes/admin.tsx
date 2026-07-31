@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth-context";
@@ -22,23 +22,15 @@ import {
   Bar,
 } from "recharts";
 
+// No `beforeLoad` auth guard: it runs during SSR, where the browser Supabase client
+// has no session storage, so getSession() always returned null and every direct hit
+// on /admin bounced to /login. It also gave no real protection — the redirect ran on
+// data the client controls. Access is enforced by RLS (admin-only policies backed by
+// has_role); the guard below only decides what this component renders.
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — FormFlow" }] }),
-  beforeLoad: async () => {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session?.user) {
-      throw redirect({ to: "/login" });
-    }
-    const { data: roleRow } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", session.user.id)
-      .eq("role", "admin")
-      .maybeSingle();
-    if (!roleRow) {
-      throw redirect({ to: "/dashboard" });
-    }
-  },
+  head: () => ({
+    meta: [{ title: "Admin — Agency.AI" }, { name: "robots", content: "noindex, nofollow" }],
+  }),
   component: AdminPage,
 });
 
@@ -86,6 +78,11 @@ function AdminPage() {
       supabase.from("profiles").select("id, full_name, email, created_at"),
       supabase.from("user_roles").select("user_id, role"),
     ]);
+    const failed = [subRes, profRes, roleRes].find((r) => r.error);
+    if (failed?.error) {
+      console.error(failed.error);
+      toast.error("Couldn't load admin data. Please refresh.");
+    }
     setSubmissions(subRes.data ?? []);
     setProfiles(profRes.data ?? []);
     setRoles((roleRes.data ?? []) as RoleRow[]);
@@ -185,7 +182,11 @@ function AdminPage() {
       }
       toast.success("Promoted to admin");
     } else {
-      const { error } = await supabase.from("user_roles").delete().eq("user_id", uid).eq("role", "admin");
+      const { error } = await supabase
+        .from("user_roles")
+        .delete()
+        .eq("user_id", uid)
+        .eq("role", "admin");
       if (error) {
         toast.error(error.message);
         return;
@@ -247,7 +248,11 @@ function AdminPage() {
                 <LineChart data={lineData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="date" stroke="hsl(var(--muted-foreground))" fontSize={11} />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={11} allowDecimals={false} />
+                  <YAxis
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                    allowDecimals={false}
+                  />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
@@ -255,7 +260,13 @@ function AdminPage() {
                       borderRadius: "8px",
                     }}
                   />
-                  <Line type="monotone" dataKey="count" stroke="hsl(var(--primary))" strokeWidth={2} dot={false} />
+                  <Line
+                    type="monotone"
+                    dataKey="count"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth={2}
+                    dot={false}
+                  />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -268,7 +279,11 @@ function AdminPage() {
                 <BarChart data={dowData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                   <XAxis dataKey="day" stroke="hsl(var(--muted-foreground))" fontSize={11} />
-                  <YAxis stroke="hsl(var(--muted-foreground))" fontSize={11} allowDecimals={false} />
+                  <YAxis
+                    stroke="hsl(var(--muted-foreground))"
+                    fontSize={11}
+                    allowDecimals={false}
+                  />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: "hsl(var(--card))",
@@ -339,15 +354,24 @@ function AdminPage() {
                       </tr>
                     ) : (
                       pageItems.map((s) => (
-                        <tr key={s.id} className="border-b border-border last:border-0 hover:bg-muted/20">
+                        <tr
+                          key={s.id}
+                          className="border-b border-border last:border-0 hover:bg-muted/20"
+                        >
                           <td className="px-4 py-3 font-medium text-foreground">{s.name}</td>
                           <td className="px-4 py-3 text-muted-foreground">{s.email}</td>
-                          <td className="max-w-md truncate px-4 py-3 text-muted-foreground">{s.message}</td>
+                          <td className="max-w-md truncate px-4 py-3 text-muted-foreground">
+                            {s.message}
+                          </td>
                           <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
                             {format(new Date(s.created_at), "MMM d, yyyy")}
                           </td>
                           <td className="px-4 py-3 text-right">
-                            <Button variant="ghost" size="icon" onClick={() => deleteSubmission(s.id)}>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => deleteSubmission(s.id)}
+                            >
                               <Trash2 className="h-4 w-4 text-destructive" />
                             </Button>
                           </td>
@@ -365,10 +389,20 @@ function AdminPage() {
                   Page {page} of {totalPages} · {filtered.length} total
                 </p>
                 <div className="flex gap-2">
-                  <Button variant="outline" size="sm" disabled={page === 1} onClick={() => setPage(page - 1)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === 1}
+                    onClick={() => setPage(page - 1)}
+                  >
                     Previous
                   </Button>
-                  <Button variant="outline" size="sm" disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    disabled={page === totalPages}
+                    onClick={() => setPage(page + 1)}
+                  >
                     Next
                   </Button>
                 </div>
@@ -401,7 +435,9 @@ function AdminPage() {
                         const isAdminUser = adminUserIds.has(p.id);
                         return (
                           <tr key={p.id} className="border-b border-border last:border-0">
-                            <td className="px-4 py-3 font-medium text-foreground">{p.full_name || "—"}</td>
+                            <td className="px-4 py-3 font-medium text-foreground">
+                              {p.full_name || "—"}
+                            </td>
                             <td className="px-4 py-3 text-muted-foreground">{p.email}</td>
                             <td className="whitespace-nowrap px-4 py-3 text-muted-foreground">
                               {format(new Date(p.created_at), "MMM d, yyyy")}

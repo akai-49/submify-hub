@@ -4,34 +4,40 @@ import { Globe, Code2, Bot, Database, Cloud, Webhook } from "lucide-react";
 const services = [
   {
     title: "Website Development",
-    description: "Lightning-fast, SEO-optimized marketing websites built with modern frameworks to convert visitors into customers.",
+    description:
+      "Lightning-fast, SEO-optimized marketing websites built with modern frameworks to convert visitors into customers.",
     icon: Globe,
   },
   {
     title: "SaaS Development",
-    description: "Scalable and secure multi-tenant web applications with complex dashboards and subscription logic.",
+    description:
+      "Scalable and secure multi-tenant web applications with complex dashboards and subscription logic.",
     icon: Code2,
   },
   {
     title: "AI Automation",
-    description: "Custom AI workflows and chatbots that automate your business operations and save thousands of hours.",
+    description:
+      "Custom AI workflows and chatbots that automate your business operations and save thousands of hours.",
     icon: Bot,
   },
   {
     title: "Frappe ERP Solutions",
-    description: "Tailored enterprise resource planning implementations using the powerful Frappe framework.",
+    description:
+      "Tailored enterprise resource planning implementations using the powerful Frappe framework.",
     icon: Database,
   },
   {
     title: "Cloud Deployment",
-    description: "Robust infrastructure setup on AWS, Cloudflare, or Vercel for high availability and performance.",
+    description:
+      "Robust infrastructure setup on AWS, Cloudflare, or Vercel for high availability and performance.",
     icon: Cloud,
   },
   {
     title: "API Integrations",
-    description: "Seamlessly connect your existing tools and services to create unified automated workflows.",
+    description:
+      "Seamlessly connect your existing tools and services to create unified automated workflows.",
     icon: Webhook,
-  }
+  },
 ];
 
 export function Services() {
@@ -43,7 +49,7 @@ export function Services() {
             Expertise that drives <span className="text-primary">growth.</span>
           </h2>
           <p className="text-lg text-muted-foreground">
-            We deliver enterprise-grade solutions tailored to your unique business challenges, 
+            We deliver enterprise-grade solutions tailored to your unique business challenges,
             combining cutting-edge technology with beautiful design.
           </p>
         </div>

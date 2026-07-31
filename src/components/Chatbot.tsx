@@ -11,7 +11,7 @@ type Message = {
 export function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", text: "Hello! How can I help you today?", sender: "bot" }
+    { id: "1", text: "Hello! How can I help you today?", sender: "bot" },
   ]);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -67,7 +67,9 @@ export function Chatbot() {
             </div>
             <div>
               <h3 className="font-semibold leading-none mb-1">Support Bot</h3>
-              <p className="text-xs text-primary-foreground/80 leading-none">Online & ready to help</p>
+              <p className="text-xs text-primary-foreground/80 leading-none">
+                Online & ready to help
+              </p>
             </div>
           </div>
 
@@ -82,10 +84,16 @@ export function Chatbot() {
               >
                 <div
                   className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-                    msg.sender === "user" ? "bg-primary text-primary-foreground" : "bg-muted-foreground/20 text-foreground"
+                    msg.sender === "user"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted-foreground/20 text-foreground"
                   }`}
                 >
-                  {msg.sender === "user" ? <User className="h-4 w-4" /> : <Bot className="h-4 w-4" />}
+                  {msg.sender === "user" ? (
+                    <User className="h-4 w-4" />
+                  ) : (
+                    <Bot className="h-4 w-4" />
+                  )}
                 </div>
                 <div
                   className={`rounded-2xl px-4 py-2 text-sm ${
@@ -111,7 +119,12 @@ export function Chatbot() {
                 placeholder="Type your message..."
                 className="flex-1 bg-muted/50 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all text-foreground"
               />
-              <Button type="submit" size="icon" className="rounded-full h-10 w-10 shrink-0" disabled={!inputValue.trim()}>
+              <Button
+                type="submit"
+                size="icon"
+                className="rounded-full h-10 w-10 shrink-0"
+                disabled={!inputValue.trim()}
+              >
                 <Send className="h-4 w-4 ml-0.5" />
               </Button>
             </form>

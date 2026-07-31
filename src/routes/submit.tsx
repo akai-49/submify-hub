@@ -16,7 +16,7 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 export const Route = createFileRoute("/submit")({
   head: () => ({
     meta: [
-      { title: "Submit — FormFlow" },
+      { title: "Submit — Agency.AI" },
       { name: "description", content: "Send us a message. We'll get back to you shortly." },
     ],
   }),
@@ -88,26 +88,46 @@ function SubmitPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 rounded-xl border border-border bg-card p-6 md:p-8">
+              {/* noValidate: let Zod own validation. The native type="email" check fires
+                  first otherwise, blocking submit with a browser tooltip so the styled
+                  field errors below never render. */}
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                noValidate
+                className="space-y-5 rounded-xl border border-border bg-card p-6 md:p-8"
+              >
                 <div>
                   <Label htmlFor="name">Name *</Label>
                   <Input id="name" {...register("name")} className="mt-1" />
-                  {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>}
+                  {errors.name && (
+                    <p className="mt-1 text-xs text-destructive">{errors.name.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="email">Email *</Label>
                   <Input id="email" type="email" {...register("email")} className="mt-1" />
-                  {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>}
+                  {errors.email && (
+                    <p className="mt-1 text-xs text-destructive">{errors.email.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="phone">Phone</Label>
-                  <Input id="phone" {...register("phone")} className="mt-1" placeholder="Optional" />
-                  {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone.message}</p>}
+                  <Input
+                    id="phone"
+                    {...register("phone")}
+                    className="mt-1"
+                    placeholder="Optional"
+                  />
+                  {errors.phone && (
+                    <p className="mt-1 text-xs text-destructive">{errors.phone.message}</p>
+                  )}
                 </div>
                 <div>
                   <Label htmlFor="message">Message *</Label>
                   <Textarea id="message" rows={5} {...register("message")} className="mt-1" />
-                  {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>}
+                  {errors.message && (
+                    <p className="mt-1 text-xs text-destructive">{errors.message.message}</p>
+                  )}
                 </div>
                 <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

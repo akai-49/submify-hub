@@ -4,28 +4,32 @@ const metrics = [
   {
     value: "2x",
     label: "Faster Delivery",
-    description: "Our optimized workflows and boilerplate systems allow us to ship production-ready apps in half the usual time."
+    description:
+      "Our optimized workflows and boilerplate systems allow us to ship production-ready apps in half the usual time.",
   },
   {
     value: "99.9%",
     label: "Uptime & Scalability",
-    description: "Enterprise-grade architecture that handles traffic spikes and scales automatically with your user base."
+    description:
+      "Enterprise-grade architecture that handles traffic spikes and scales automatically with your user base.",
   },
   {
     value: "100+",
     label: "Automated Workflows",
-    description: "Custom AI integrations that save our clients thousands of manual hours every single month."
+    description:
+      "Custom AI integrations that save our clients thousands of manual hours every single month.",
   },
   {
     value: "SOC2",
     label: "Enterprise Security",
-    description: "Built-in security best practices, data encryption, and compliance-ready infrastructure from day one."
-  }
+    description:
+      "Built-in security best practices, data encryption, and compliance-ready infrastructure from day one.",
+  },
 ];
 
 export function Metrics() {
   return (
-    <section className="py-24 bg-dark text-white border-y border-dark">
+    <section id="about" className="py-24 bg-dark text-white border-y border-dark">
       <div className="container mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {metrics.map((metric, index) => (
@@ -41,9 +45,7 @@ export function Metrics() {
                 {metric.value}
               </div>
               <h3 className="text-xl font-bold mb-3">{metric.label}</h3>
-              <p className="text-gray-400 leading-relaxed">
-                {metric.description}
-              </p>
+              <p className="text-gray-400 leading-relaxed">{metric.description}</p>
             </motion.div>
           ))}
         </div>

@@ -24,5 +24,18 @@ export default tseslint.config(
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
+  {
+    // react-refresh/only-export-components flags files that export both a component and
+    // something else. It is a dev-time HMR nicety, not a correctness rule, and every hit
+    // is an intentional pattern: vendored shadcn/ui primitives export their cva variants,
+    // the router exports getRouter beside its error component, and the auth module exports
+    // its provider beside the useAuth hook. Splitting them would add files for no gain.
+    files: ["src/components/ui/**/*.tsx", "src/router.tsx", "src/lib/auth-context.tsx"],
+    rules: { "react-refresh/only-export-components": "off" },
+  },
+  {
+    files: ["src/**/*.test.{ts,tsx}", "src/test/**", "e2e/**", "*.config.{ts,js}"],
+    rules: { "@typescript-eslint/no-explicit-any": "off" },
+  },
   eslintPluginPrettier,
 );

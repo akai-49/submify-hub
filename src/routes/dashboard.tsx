@@ -5,11 +5,14 @@ import { useAuth } from "@/lib/auth-context";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { toast } from "sonner";
 import { Inbox, Plus } from "lucide-react";
 import { format } from "date-fns";
 
 export const Route = createFileRoute("/dashboard")({
-  head: () => ({ meta: [{ title: "Dashboard — FormFlow" }] }),
+  head: () => ({
+    meta: [{ title: "Dashboard — Agency.AI" }, { name: "robots", content: "noindex, nofollow" }],
+  }),
   component: Dashboard,
 });
 
@@ -41,7 +44,11 @@ function Dashboard() {
       .select("id, name, email, phone, message, created_at")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false })
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) {
+          console.error(error);
+          toast.error("Couldn't load your submissions. Please refresh.");
+        }
         setSubmissions(data ?? []);
         setLoading(false);
       });
@@ -94,7 +101,10 @@ function Dashboard() {
         ) : (
           <div className="space-y-3">
             {submissions.map((s) => (
-              <div key={s.id} className="rounded-lg border border-border bg-card p-5 transition hover:border-primary/40">
+              <div
+                key={s.id}
+                className="rounded-lg border border-border bg-card p-5 transition hover:border-primary/40"
+              >
                 <div className="flex items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2">

@@ -2,19 +2,43 @@ import { motion } from "framer-motion";
 import { Zap, Layers, Sparkles, Code2, HeadphonesIcon, Rocket } from "lucide-react";
 
 const features = [
-  { icon: Layers, title: "Scalable Architecture", desc: "Enterprise-grade systems designed to grow with your business and handle millions of users seamlessly." },
-  { icon: Rocket, title: "AI Integration", desc: "Infusing the latest LLMs and custom machine learning models directly into your product workflows." },
-  { icon: Code2, title: "Clean Code", desc: "Strictly typed, highly maintainable, and well-documented codebases built on TanStack and React." },
-  { icon: Sparkles, title: "Modern UI/UX", desc: "Premium, conversion-focused designs that leverage glassmorphism and fluid animations." },
-  { icon: HeadphonesIcon, title: "Long-term Support", desc: "Dedicated maintenance, monitoring, and iterative improvements even after your product launches." },
-  { icon: Zap, title: "Fast Delivery", desc: "Agile methodologies ensuring rapid prototyping, continuous integration, and timely deployment." },
+  {
+    icon: Layers,
+    title: "Scalable Architecture",
+    desc: "Enterprise-grade systems designed to grow with your business and handle millions of users seamlessly.",
+  },
+  {
+    icon: Rocket,
+    title: "AI Integration",
+    desc: "Infusing the latest LLMs and custom machine learning models directly into your product workflows.",
+  },
+  {
+    icon: Code2,
+    title: "Clean Code",
+    desc: "Strictly typed, highly maintainable, and well-documented codebases built on TanStack and React.",
+  },
+  {
+    icon: Sparkles,
+    title: "Modern UI/UX",
+    desc: "Premium, conversion-focused designs that leverage glassmorphism and fluid animations.",
+  },
+  {
+    icon: HeadphonesIcon,
+    title: "Long-term Support",
+    desc: "Dedicated maintenance, monitoring, and iterative improvements even after your product launches.",
+  },
+  {
+    icon: Zap,
+    title: "Fast Delivery",
+    desc: "Agile methodologies ensuring rapid prototyping, continuous integration, and timely deployment.",
+  },
 ];
 
 export function Features() {
   return (
     <section id="features" className="container mx-auto px-4 py-32 relative z-10">
       <div className="absolute right-0 bottom-0 -z-10 h-[600px] w-[600px] translate-y-1/3 translate-x-1/3 rounded-full bg-primary/10 opacity-40 blur-[150px]" />
-      
+
       <div className="mx-auto max-w-4xl text-center mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -25,10 +49,14 @@ export function Features() {
           Why Choose Us
         </motion.div>
         <h2 className="text-4xl font-extrabold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-          Engineered for <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">Excellence.</span>
+          Engineered for{" "}
+          <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            Excellence.
+          </span>
         </h2>
         <p className="mt-6 text-muted-foreground md:text-xl max-w-2xl mx-auto leading-relaxed">
-          We combine deep technical expertise with stunning design to deliver digital products that stand out in the modern web.
+          We combine deep technical expertise with stunning design to deliver digital products that
+          stand out in the modern web.
         </p>
       </div>
 

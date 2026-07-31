@@ -7,51 +7,62 @@ export function Hero() {
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
       {/* Background with Grid and Radial Glow */}
       <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0" 
+        <div
+          className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at center, rgba(255,107,0,0.12), transparent 60%)`
+            backgroundImage: `radial-gradient(circle at center, rgba(255,107,0,0.12), transparent 60%)`,
           }}
         />
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `linear-gradient(to right, #E5E7EB 1px, transparent 1px), linear-gradient(to bottom, #E5E7EB 1px, transparent 1px)`,
             backgroundSize: `40px 40px`,
             maskImage: `linear-gradient(to bottom, white, transparent)`,
-            opacity: 0.3
+            opacity: 0.3,
           }}
         />
       </div>
 
       <div className="container relative z-10 mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex flex-col items-start"
           >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-foreground leading-[1.1] mb-6">
-              Build Websites.<br />
-              Automate Business.<br />
+              Build Websites.
+              <br />
+              Automate Business.
+              <br />
               <span className="text-primary">Scale Faster.</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg leading-relaxed">
-              We help startups and businesses build modern web applications, AI systems, SaaS platforms and business automation solutions.
+              We help startups and businesses build modern web applications, AI systems, SaaS
+              platforms and business automation solutions.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-              <Button size="lg" className="h-14 px-8 text-base rounded-full bg-primary hover:bg-primary-hover text-white font-medium group transition-all" asChild>
+              <Button
+                size="lg"
+                className="h-14 px-8 text-base rounded-full bg-primary hover:bg-primary-hover text-white font-medium group transition-all"
+                asChild
+              >
                 <a href="#contact">
                   Book a Free Consultation
                   <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </Button>
-              <Button size="lg" variant="outline" className="h-14 px-8 text-base rounded-full font-medium hover:bg-surface border-border transition-all" asChild>
+              <Button
+                size="lg"
+                variant="outline"
+                className="h-14 px-8 text-base rounded-full font-medium hover:bg-surface border-border transition-all"
+                asChild
+              >
                 <a href="#portfolio">View Portfolio</a>
               </Button>
             </div>
@@ -73,7 +84,7 @@ export function Hero() {
                   <div className="w-3 h-3 rounded-full bg-success/80" />
                 </div>
               </div>
-              
+
               {/* Mockup Body */}
               <div className="flex-1 p-6 flex flex-col gap-4 bg-surface">
                 {/* Simulated Dashboard Content */}
@@ -81,16 +92,19 @@ export function Hero() {
                   <div className="h-6 w-32 bg-border/50 rounded animate-pulse" />
                   <div className="h-8 w-24 bg-primary/20 rounded-full" />
                 </div>
-                
+
                 <div className="grid grid-cols-3 gap-4">
                   {[1, 2, 3].map((i) => (
-                    <div key={i} className="h-24 bg-background rounded-xl border border-border/50 p-4 flex flex-col justify-between">
+                    <div
+                      key={i}
+                      className="h-24 bg-background rounded-xl border border-border/50 p-4 flex flex-col justify-between"
+                    >
                       <div className="h-4 w-12 bg-border/50 rounded" />
                       <div className="h-6 w-20 bg-border/80 rounded" />
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="flex-1 bg-background rounded-xl border border-border/50 p-4 mt-2">
                   <div className="h-full w-full rounded border-2 border-dashed border-border/50 flex items-center justify-center">
                     <div className="h-8 w-8 rounded-full bg-primary/20 animate-ping" />
@@ -98,9 +112,9 @@ export function Hero() {
                 </div>
               </div>
             </div>
-            
+
             {/* Decorative Floating Element */}
-            <motion.div 
+            <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="absolute -bottom-6 -left-6 bg-background rounded-xl shadow-xl border border-border p-4 flex items-center gap-4"
@@ -114,7 +128,6 @@ export function Hero() {
               </div>
             </motion.div>
           </motion.div>
-          
         </div>
       </div>
     </section>
