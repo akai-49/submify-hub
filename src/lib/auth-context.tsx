@@ -24,13 +24,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setIsAdmin(false);
       return;
     }
-    const { data } = await supabase
-      .from("user_roles")
-      .select("role")
-      .eq("user_id", uid)
-      .eq("role", "admin")
-      .maybeSingle();
-    setIsAdmin(!!data);
+    try {
+      const { data, error } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", uid)
+        .eq("role", "admin")
+        .maybeSingle();
+      if (error) {
+        console.warn("user_roles check error:", error.message);
+        setIsAdmin(false);
+        return;
+      }
+      setIsAdmin(!!data);
+    } catch (err) {
+      console.warn("checkAdmin exception:", err);
+      setIsAdmin(false);
+    }
   };
 
   useEffect(() => {
@@ -38,17 +48,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, newSession) => {
       setSession(newSession);
       setUser(newSession?.user ?? null);
+      if (newSession && typeof window !== "undefined" && window.location.hash.includes("access_token")) {
+        window.history.replaceState(null, "", window.location.pathname);
+      }
       // Defer role check to avoid deadlock in callback
       setTimeout(() => {
         checkAdmin(newSession?.user?.id);
       }, 0);
     });
 
-    supabase.auth.getSession().then(({ data: { session: existing } }) => {
-      setSession(existing);
-      setUser(existing?.user ?? null);
-      checkAdmin(existing?.user?.id).finally(() => setLoading(false));
-    });
+    supabase.auth
+      .getSession()
+      .then(({ data: { session: existing } }) => {
+        setSession(existing);
+        setUser(existing?.user ?? null);
+        checkAdmin(existing?.user?.id).finally(() => setLoading(false));
+      })
+      .catch((err) => {
+        console.error("getSession error:", err);
+        setLoading(false);
+      });
 
     return () => sub.subscription.unsubscribe();
   }, []);
