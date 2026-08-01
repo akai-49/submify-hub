@@ -3,6 +3,53 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
+    title: "MSuite Workspace & SaaS Platform",
+    description:
+      "Enterprise multi-tenant SaaS platform & omnichannel business suite. Features Meta WhatsApp Commerce catalog sync, AI Lead Generation, Social Media Marketing automation, multi-workspace entitlement engine, and Frappe ERPNext integration.",
+    tech: ["Frappe", "ERPNext", "Python", "React", "Meta Graph API", "PostgreSQL"],
+    category: "Flagship SaaS & Enterprise Suite",
+    mockup: (
+      <div className="w-full h-full bg-slate-950 text-slate-100 p-5 font-sans flex flex-col justify-between">
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="h-3 w-3 rounded-full bg-amber-500 animate-pulse" />
+            <span className="text-xs font-bold tracking-wide uppercase text-slate-200">MSuite Workspace Console</span>
+          </div>
+          <span className="text-[10px] font-mono bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded font-semibold">
+            Multi-Tenant Enterprise
+          </span>
+        </div>
+        {/* Workspace Entitlements & Meta Sync Grid */}
+        <div className="grid grid-cols-3 gap-3 my-3">
+          <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+            <span className="text-[10px] text-slate-400 block">WhatsApp Catalog Sync</span>
+            <span className="text-base font-extrabold text-emerald-400">Synced (1,280 Items)</span>
+            <span className="text-[9px] text-slate-400 block mt-0.5">Meta Commerce Platform</span>
+          </div>
+          <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+            <span className="text-[10px] text-slate-400 block">AI Lead Generation</span>
+            <span className="text-base font-extrabold text-white">4,890 Leads</span>
+            <span className="text-[9px] text-emerald-400 block mt-0.5">↑ +38.4% This Week</span>
+          </div>
+          <div className="bg-slate-900/80 p-3 rounded-lg border border-slate-800">
+            <span className="text-[10px] text-slate-400 block">Active Workspaces</span>
+            <span className="text-base font-extrabold text-indigo-400">42 Tenants</span>
+            <span className="text-[9px] text-indigo-300 block mt-0.5">Auto Grant Sync</span>
+          </div>
+        </div>
+        {/* Active Stream */}
+        <div className="bg-slate-900/60 rounded-lg p-3 border border-slate-800/80 space-y-1.5 text-xs">
+          <div className="flex justify-between items-center text-slate-300">
+            <span className="font-mono text-emerald-400">Meta Commerce Order Webhook</span>
+            <span className="text-[10px] text-slate-400">Verified HMAC-SHA256</span>
+          </div>
+          <p className="text-[11px] text-slate-300">Order #MC-9942 processed $\rightarrow$ Synced to Customer MSuite Client & ERPNext</p>
+        </div>
+      </div>
+    ),
+  },
+  {
     title: "NexFinance SaaS",
     description:
       "A comprehensive financial dashboard for enterprise clients. Features real-time data visualization, predictive AI modeling, and automated reporting systems.",

@@ -21,9 +21,9 @@ const services = [
     icon: Bot,
   },
   {
-    title: "Frappe ERP Solutions",
+    title: "MSuite & Frappe ERP Solutions",
     description:
-      "Tailored enterprise resource planning implementations using the powerful Frappe framework.",
+      "Enterprise MSuite workspace apps and custom ERP implementations built using the powerful Frappe Framework & ERPNext.",
     icon: Database,
   },
   {
