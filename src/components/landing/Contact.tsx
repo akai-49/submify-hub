@@ -76,41 +76,52 @@ export function Contact() {
             </p>
 
             <div className="mt-12 flex flex-col gap-4">
-              <Button
-                size="lg"
-                className="justify-between group h-16 rounded-2xl text-base bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C3F] text-white border-0 shadow-[0_0_30px_-10px_#25D366] transition-all hover:scale-105"
+              <a
+                href="https://wa.me/919535450135"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-between group h-16 px-6 rounded-2xl text-base bg-gradient-to-r from-[#25D366] to-[#1DA851] hover:from-[#1DA851] hover:to-[#128C3F] text-white font-medium shadow-[0_0_30px_-10px_#25D366] transition-all hover:scale-105"
               >
                 <span className="flex items-center gap-3">
-                  <MessageSquare className="h-6 w-6" /> Chat on WhatsApp
+                  <MessageSquare className="h-6 w-6" /> Chat on WhatsApp (+91 9535450135)
                 </span>
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="justify-between group h-16 rounded-2xl text-base bg-background/40 backdrop-blur-xl border-border/50 hover:bg-background/60 transition-all hover:scale-105 hover:border-primary/50 text-foreground"
+              </a>
+              <a
+                href="mailto:abhishek.dev.4949@gmail.com"
+                className="flex items-center justify-between group h-16 px-6 rounded-2xl text-base bg-background/40 backdrop-blur-xl border border-border/50 hover:bg-background/60 transition-all hover:scale-105 hover:border-primary/50 text-foreground font-medium"
               >
                 <span className="flex items-center gap-3">
                   <Mail className="h-6 w-6 text-muted-foreground group-hover:text-primary transition-colors" />{" "}
-                  Email Us
+                  abhishek.dev.4949@gmail.com
                 </span>
                 <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-2 text-muted-foreground group-hover:text-primary" />
-              </Button>
+              </a>
             </div>
 
-            <div className="mt-16 flex items-center gap-6">
+            <div className="mt-12 pt-8 border-t border-border/40 text-xs text-muted-foreground space-y-1">
+              <p className="font-semibold text-foreground">AK SOLUTIONS (Govt. MSME Registered Micro Enterprise)</p>
+              <p>Udyam Reg. No: UDYAM-KR-04-0192388 | NIC Code: 62020</p>
+              <p>AK Empire, Ward 31, Sangam Nagar, Gokak, Belagavi, Karnataka - 591307</p>
+            </div>
+
+            <div className="mt-8 flex items-center gap-6">
               <span className="text-sm font-medium text-muted-foreground uppercase tracking-widest">
                 Follow Us
               </span>
               <div className="h-px w-12 bg-border/50" />
               <a
-                href="#"
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-background/50 border border-border/50 transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 hover:shadow-[0_0_20px_-5px_var(--color-primary)]"
               >
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex h-12 w-12 items-center justify-center rounded-full bg-background/50 border border-border/50 transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary hover:scale-110 hover:shadow-[0_0_20px_-5px_var(--color-primary)]"
               >
                 <Linkedin className="h-5 w-5" />

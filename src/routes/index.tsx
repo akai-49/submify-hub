@@ -17,10 +17,22 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": canonical("/#organization"),
-      name: SITE_NAME,
+      name: "AK SOLUTIONS",
+      alternateName: SITE_NAME,
       url: SITE_URL,
       logo: canonical("/favicon.svg"),
       description: SITE_DESCRIPTION,
+      identifier: "UDYAM-KR-04-0192388",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "AK Empire, Ward 31, Sangam Nagar",
+        addressLocality: "Gokak",
+        addressRegion: "Karnataka",
+        postalCode: "591307",
+        addressCountry: "IN",
+      },
+      telephone: "+91-9535450135",
+      email: "abhishek.dev.4949@gmail.com",
     },
     {
       "@type": "WebSite",
